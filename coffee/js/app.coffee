@@ -2,6 +2,7 @@ angular.module('starter', [
   'ionic'
   'starter.controllers'
   'starter.services'
+  'ngCordova'
 ]).run(($ionicPlatform) ->
   $ionicPlatform.ready ->
     # Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

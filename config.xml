@@ -16,4 +16,5 @@
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
+  <gap:plugin name="de.neofonie.cordova.plugin.nativeaudio" version="3.0.2" />
 </widget>
