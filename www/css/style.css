@@ -1,1 +1,10 @@
-/* Empty. Add your own CSS if you like */
+.fixed-outside {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height:  70px;
+}
+
+.has-bottom .scroll {
+  padding-bottom: 70px !important;
+}
