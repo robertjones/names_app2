@@ -1,4 +1,4 @@
-angular.module('names.controllers', []).controller('AppCtrl', ($scope, $ionicModal, $timeout) ->
+angular.module('starter.controllers', []).controller('AppCtrl', ($scope, $ionicModal, $timeout) ->
   # Form data for the login modal
   $scope.loginData = {}
   # Create the login modal that we will use later

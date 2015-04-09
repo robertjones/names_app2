@@ -1,6 +1,6 @@
-angular.module('names', [
+angular.module('starter', [
   'ionic'
-  'names.controllers'
+  'starter.controllers'
 ]).run(($ionicPlatform) ->
   $ionicPlatform.ready ->
     # Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
