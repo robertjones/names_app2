@@ -1,7 +1,7 @@
 {
-  "name": "samplesidemenu",
+  "name": "names_in_a_hat",
   "version": "1.0.0",
-  "description": "sampleSideMenu: An Ionic project",
+  "description": "A party game",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^1.3.3",
