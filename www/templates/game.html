@@ -1,16 +1,23 @@
 <ion-view view-title="Game">
-  <ion-content class="has-bottom">
 
-    <div style="background-color: blue">
+
+
+  <div class="list bar-subheader">
+
+    <div class="item item-divider">
+
+      <small>{{ currentRound() }}</small>
+      <span class="item-note {{currentTeam().class}}">{{ currentTeam().name }} Team</span>
+    </div>
+              <div style="background-color: blue">
       <div style="width: {{100 - timePercent()}}%; height: 4px; background-color: lightblue" class="right"></div>
     </div>
+  </div>
 
-    <div class="list">
-      <div class="item item-divider">
-        <small>{{ currentRound() }}</small>
-        <span class="item-note {{currentTeam().class}}">{{ currentTeam().name }} Team</span>
-      </div>
-    </div>
+  <ion-content class="has-bottom has-subheader">
+
+
+
 
     <div style="text-align: center">
         <h1 style="margin-top: 40px;" ng-style="{ display: displayName ? '' : 'none'}">{{ currentCard().text }}</h1>
@@ -20,13 +27,13 @@
 
   <div class="row item item-divider fixed-outside">
     <div class="col">
-          <button class="button button-block button-large button-assertive icon ion-close" style="margin: 0px" ng-click="foul()"> <br />Foul</button>
+          <button class="button button-block button-assertive icon ion-close" style="margin: 0px" ng-click="foul()"> Foul</button>
         </div>
         <div class="col">
-          <button class="button button-block button-large button-energized icon ion-forward" ng-class="{'disabled' : unSkippable()}" style="margin: 0px" ng-click="skip()"><br />Skip</button>
+          <button class="button button-block button-energized icon ion-forward" ng-class="{'disabled' : unSkippable()}" style="margin: 0px" ng-click="skip()"> Skip</button>
         </div>
         <div class="col">
-            <button class="button button-block button-large button-balanced icon ion-checkmark" style="margin: 0px" ng-click="got()"><br />Got it</button>
+            <button class="button button-block button-balanced icon ion-checkmark" style="margin: 0px" ng-click="got()"> Got it</button>
         </div>
   </div>
 
