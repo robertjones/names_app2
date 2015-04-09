@@ -25,11 +25,17 @@ angular.module('starter', [
     url: '/playlists'
     views: 'menuContent':
       templateUrl: 'templates/playlists.html'
-      controller: 'PlaylistsCtrl').state 'app.single',
+      controller: 'PlaylistsCtrl'
+  ).state('app.single',
     url: '/playlists/:playlistId'
     views: 'menuContent':
       templateUrl: 'templates/playlist.html'
       controller: 'PlaylistCtrl'
+  ).state('app.game',
+    url: '/game'
+    views: 'menuContent':
+      templateUrl: 'templates/game.html'
+      controller: 'GameCtrl')
   # if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise '/app/playlists'
+  $urlRouterProvider.otherwise '/app/game'
   return

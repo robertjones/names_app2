@@ -58,4 +58,6 @@ angular.module('starter.controllers', []).controller('AppCtrl', ($scope, $ionicM
     }
   ]
   return
-).controller 'PlaylistCtrl', ($scope, $stateParams) ->
+).controller('PlaylistCtrl', ($scope, $stateParams) ->)
+
+.controller('GameCtrl', ($scope) ->)

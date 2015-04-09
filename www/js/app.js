@@ -45,8 +45,16 @@
           controller: 'PlaylistCtrl'
         }
       }
+    }).state('app.game', {
+      url: '/game',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/game.html',
+          controller: 'GameCtrl'
+        }
+      }
     });
-    $urlRouterProvider.otherwise('/app/playlists');
+    $urlRouterProvider.otherwise('/app/game');
   });
 
 }).call(this);

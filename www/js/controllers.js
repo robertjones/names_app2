@@ -41,6 +41,6 @@
         id: 6
       }
     ];
-  }).controller('PlaylistCtrl', function($scope, $stateParams) {});
+  }).controller('PlaylistCtrl', function($scope, $stateParams) {}).controller('GameCtrl', function($scope) {});
 
 }).call(this);
