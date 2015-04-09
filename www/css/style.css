@@ -2,9 +2,9 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  height:  210px;
+  height:  175px;
 }
 
 .has-bottom .scroll {
-  padding-bottom: 210px !important;
+  padding-bottom: 175px !important;
 }

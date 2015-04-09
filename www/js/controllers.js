@@ -41,6 +41,106 @@
         id: 6
       }
     ];
-  }).controller('PlaylistCtrl', function($scope, $stateParams) {}).controller('GameCtrl', function($scope) {});
+  }).controller('PlaylistCtrl', function($scope, $stateParams) {}).controller('GameCtrl', function($scope, $interval, $ionicPopup, Game) {
+    var counter, end_sound, gameOverAlert, game_over_sound, goLength, maxSkips, newGameAlert, resetTimer, roundAlert, round_sound, startTimer, stopTimer, timeRemaining, timer, timerOn, turnEndAlert, turnStartAlert;
+    $scope.currentCard = Game.currentCard;
+    $scope.skip = Game.skip;
+    $scope.foul = Game.foul;
+    $scope.got = Game.got;
+    $scope.currentTeam = Game.currentTeam;
+    $scope.currentRound = Game.currentRound;
+    maxSkips = 2;
+    $scope.unSkippable = function() {
+      return Game.skips >= maxSkips;
+    };
+    roundAlert = function() {
+      stopTimer();
+      round_sound.play();
+      return $ionicPopup.alert({
+        title: Game.currentRound(),
+        template: 'Your go continues with a new round.',
+        okText: 'Continue'
+      }).then(startTimer);
+    };
+    Game.roundAlert = roundAlert;
+    turnEndAlert = function() {
+      stopTimer();
+      end_sound.play();
+      return $ionicPopup.alert({
+        title: 'Time\'s up',
+        template: (Game.currentTeam().name) + " Team, your turn is over.<br />\nYou got " + Game.turnPoints + " points this turn.<br />\nScores: " + (Game.scoreStr()) + ".",
+        okText: 'OK',
+        okType: 'button-energized'
+      }).then(turnStartAlert);
+    };
+    Game.turnEndAlert = turnEndAlert;
+    turnStartAlert = function() {
+      Game.teamSwitch();
+      return $ionicPopup.alert({
+        title: (Game.currentTeam().name) + " Team, it's your turn",
+        template: "It's " + (Game.currentRound()) + ".<br />\nScores: " + (Game.scoreStr()) + ".",
+        okText: 'Start turn',
+        okType: 'button-balanced'
+      }).then(startTimer);
+    };
+    Game.turnStartAlert = turnStartAlert;
+    gameOverAlert = function() {
+      stopTimer();
+      game_over_sound.play();
+      return $ionicPopup.alert({
+        title: 'Game over',
+        template: "Scores: " + (Game.scoreStr()) + ".",
+        okText: 'Start new game',
+        okType: 'button-assertive'
+      }).then(function() {
+        return Game.newGame();
+      });
+    };
+    Game.gameOverAlert = gameOverAlert;
+    newGameAlert = function() {
+      stopTimer();
+      return $ionicPopup.alert({
+        title: 'Get ready',
+        template: (Game.currentTeam().name) + " Team, you're up first.<br />\nIt's " + (Game.currentRound()) + ".",
+        okText: 'Start game',
+        okType: 'button-balanced'
+      }).then(startTimer);
+    };
+    Game.newGameAlert = newGameAlert;
+    goLength = 60;
+    timeRemaining = goLength * 10;
+    timerOn = true;
+    timer = function() {
+      if (timerOn) {
+        timeRemaining -= 1;
+        if (timeRemaining <= 0) {
+          timeRemaining = goLength * 10;
+          return Game.nextTeam();
+        }
+      }
+    };
+    counter = {};
+    resetTimer = function() {
+      return timeRemaining = goLength * 10;
+    };
+    Game.resetTimer = resetTimer;
+    startTimer = function() {
+      timerOn = true;
+      return $scope.displayName = true;
+    };
+    stopTimer = function() {
+      timerOn = false;
+      return $scope.displayName = false;
+    };
+    $scope.timePercent = function() {
+      return timeRemaining / goLength / 10 * 100;
+    };
+    $interval(timer, 100);
+    $scope.displayName = false;
+    end_sound = new Audio('../sounds/182351__kesu__alarm-clock-beep.wav');
+    round_sound = new Audio('../sounds/137106__chaosportal__whistle-07-cut.wav');
+    game_over_sound = new Audio('../sounds/242855__plasterbrain__friend-request.wav');
+    return Game.newGame();
+  });
 
 }).call(this);
