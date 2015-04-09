@@ -1,4 +1,4 @@
-angular.module('starter.controllers', []).controller('AppCtrl', ($scope, $ionicModal, $timeout) ->
+angular.module('starter.controllers', []).controller('AppCtrl', ($scope, $ionicModal, $timeout, $ionicPopup, Game) ->
   # Form data for the login modal
   $scope.loginData = {}
   # Create the login modal that we will use later
@@ -14,6 +14,7 @@ angular.module('starter.controllers', []).controller('AppCtrl', ($scope, $ionicM
   # Open the login modal
 
   $scope.login = ->
+    window.console.log('login clicked')
     $scope.modal.show()
     return
 
@@ -29,8 +30,20 @@ angular.module('starter.controllers', []).controller('AppCtrl', ($scope, $ionicM
     ), 1000
     return
 
+  $scope.newGame = ->
+    window.console.log('newGame clicked')
+    $ionicPopup.confirm(
+      title: 'End current game?',
+      template: 'Are you sure you want to end the current game?'
+      cancelText: 'No, play on'
+      okType: 'button-assertive'
+      okText: 'End game'
+    ).then((res) -> Game.newGame() if res)
+
   return
-).controller('PlaylistsCtrl', ($scope) ->
+)
+
+.controller('PlaylistsCtrl', ($scope) ->
   $scope.playlists = [
     {
       title: 'Reggae'
