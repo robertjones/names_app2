@@ -55,7 +55,9 @@
     };
     roundAlert = function() {
       stopTimer();
-      $cordovaNativeAudio.play('round_sound');
+      $ionicPlatform.ready(function() {
+        return $cordovaNativeAudio.play('round_sound');
+      });
       return $ionicPopup.alert({
         title: Game.currentRound(),
         template: 'Your go continues with a new round.',
@@ -65,7 +67,9 @@
     Game.roundAlert = roundAlert;
     turnEndAlert = function() {
       stopTimer();
-      $cordovaNativeAudio.play('end_sound');
+      $ionicPlatform.ready(function() {
+        return $cordovaNativeAudio.play('end_sound');
+      });
       return $ionicPopup.alert({
         title: 'Time\'s up',
         template: (Game.currentTeam().name) + " Team, your turn is over.<br />\nYou got " + Game.turnPoints + " points this turn.<br />\nScores: " + (Game.scoreStr()) + ".",
@@ -86,7 +90,9 @@
     Game.turnStartAlert = turnStartAlert;
     gameOverAlert = function() {
       stopTimer();
-      $cordovaNativeAudio.play('game_over_sound');
+      $ionicPlatform.ready(function() {
+        return $cordovaNativeAudio.play('game_over_sound');
+      });
       return $ionicPopup.alert({
         title: 'Game over',
         template: "Scores: " + (Game.scoreStr()) + ".",

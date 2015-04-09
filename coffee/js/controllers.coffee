@@ -74,7 +74,7 @@ angular.module('starter.controllers', []).controller('AppCtrl', ($scope, $ionicM
   roundAlert = ->
     stopTimer()
     # round_sound.play()
-    $cordovaNativeAudio.play('round_sound')
+    $ionicPlatform.ready(->$cordovaNativeAudio.play('round_sound'))
     $ionicPopup.alert(
       title: Game.currentRound()
       template: 'Your go continues with a new round.'
@@ -84,7 +84,7 @@ angular.module('starter.controllers', []).controller('AppCtrl', ($scope, $ionicM
   turnEndAlert = ->
     stopTimer()
     # end_sound.play()
-    $cordovaNativeAudio.play('end_sound')
+    $ionicPlatform.ready(->$cordovaNativeAudio.play('end_sound'))
     $ionicPopup.alert(
       title: 'Time\'s up'
       template: """#{Game.currentTeam().name} Team, your turn is over.<br />
@@ -107,7 +107,7 @@ angular.module('starter.controllers', []).controller('AppCtrl', ($scope, $ionicM
   gameOverAlert = ->
     stopTimer()
     # game_over_sound.play()
-    $cordovaNativeAudio.play('game_over_sound')
+    $ionicPlatform.ready(->$cordovaNativeAudio.play('game_over_sound'))
     $ionicPopup.alert(
       title: 'Game over'
       template: """Scores: #{Game.scoreStr()}."""
