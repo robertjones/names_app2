@@ -60,7 +60,7 @@ angular.module('starter.controllers', []).controller('AppCtrl', ($scope, $ionicM
   return
 ).controller('PlaylistCtrl', ($scope, $stateParams) ->)
 
-.controller('GameCtrl', ($scope, $interval, $ionicPopup, Game) ->
+.controller('GameCtrl', ($scope, $interval, $ionicPopup, $cordovaNativeAudio, $ionicPlatform, Game) ->
   $scope.currentCard = Game.currentCard
   $scope.skip = Game.skip
   $scope.foul = Game.foul
@@ -73,7 +73,8 @@ angular.module('starter.controllers', []).controller('AppCtrl', ($scope, $ionicM
   # Popups
   roundAlert = ->
     stopTimer()
-    round_sound.play()
+    # round_sound.play()
+    $cordovaNativeAudio.play('round_sound')
     $ionicPopup.alert(
       title: Game.currentRound()
       template: 'Your go continues with a new round.'
@@ -82,7 +83,8 @@ angular.module('starter.controllers', []).controller('AppCtrl', ($scope, $ionicM
   Game.roundAlert = roundAlert
   turnEndAlert = ->
     stopTimer()
-    end_sound.play()
+    # end_sound.play()
+    $cordovaNativeAudio.play('end_sound')
     $ionicPopup.alert(
       title: 'Time\'s up'
       template: """#{Game.currentTeam().name} Team, your turn is over.<br />
@@ -104,7 +106,8 @@ angular.module('starter.controllers', []).controller('AppCtrl', ($scope, $ionicM
   Game.turnStartAlert = turnStartAlert
   gameOverAlert = ->
     stopTimer()
-    game_over_sound.play()
+    # game_over_sound.play()
+    $cordovaNativeAudio.play('game_over_sound')
     $ionicPopup.alert(
       title: 'Game over'
       template: """Scores: #{Game.scoreStr()}."""
@@ -147,9 +150,15 @@ angular.module('starter.controllers', []).controller('AppCtrl', ($scope, $ionicM
   $scope.displayName = false
 
   # Sounds
-  end_sound = new Audio('../sounds/182351__kesu__alarm-clock-beep.wav')
-  round_sound = new Audio('../sounds/137106__chaosportal__whistle-07-cut.wav')
-  game_over_sound = new Audio('../sounds/242855__plasterbrain__friend-request.wav')
+  # end_sound = new Audio('../sounds/182351__kesu__alarm-clock-beep.wav')
+  # round_sound = new Audio('../sounds/137106__chaosportal__whistle-07-cut.wav')
+  # game_over_sound = new Audio('../sounds/242855__plasterbrain__friend-request.wav')
+
+  $ionicPlatform.ready( ->
+    $cordovaNativeAudio.preloadSimple('end_sound', '../sounds/182351__kesu__alarm-clock-beep.wav')
+    $cordovaNativeAudio.preloadSimple('round_sound', '../sounds/137106__chaosportal__whistle-07-cut.wav')
+    $cordovaNativeAudio.preloadSimple('game_over_sound', '../sounds/242855__plasterbrain__friend-request.wav')
+  )
 
   # Init
   Game.newGame()

@@ -41,8 +41,8 @@
         id: 6
       }
     ];
-  }).controller('PlaylistCtrl', function($scope, $stateParams) {}).controller('GameCtrl', function($scope, $interval, $ionicPopup, Game) {
-    var counter, end_sound, gameOverAlert, game_over_sound, goLength, maxSkips, newGameAlert, resetTimer, roundAlert, round_sound, startTimer, stopTimer, timeRemaining, timer, timerOn, turnEndAlert, turnStartAlert;
+  }).controller('PlaylistCtrl', function($scope, $stateParams) {}).controller('GameCtrl', function($scope, $interval, $ionicPopup, $cordovaNativeAudio, $ionicPlatform, Game) {
+    var counter, gameOverAlert, goLength, maxSkips, newGameAlert, resetTimer, roundAlert, startTimer, stopTimer, timeRemaining, timer, timerOn, turnEndAlert, turnStartAlert;
     $scope.currentCard = Game.currentCard;
     $scope.skip = Game.skip;
     $scope.foul = Game.foul;
@@ -55,7 +55,7 @@
     };
     roundAlert = function() {
       stopTimer();
-      round_sound.play();
+      $cordovaNativeAudio.play('round_sound');
       return $ionicPopup.alert({
         title: Game.currentRound(),
         template: 'Your go continues with a new round.',
@@ -65,7 +65,7 @@
     Game.roundAlert = roundAlert;
     turnEndAlert = function() {
       stopTimer();
-      end_sound.play();
+      $cordovaNativeAudio.play('end_sound');
       return $ionicPopup.alert({
         title: 'Time\'s up',
         template: (Game.currentTeam().name) + " Team, your turn is over.<br />\nYou got " + Game.turnPoints + " points this turn.<br />\nScores: " + (Game.scoreStr()) + ".",
@@ -86,7 +86,7 @@
     Game.turnStartAlert = turnStartAlert;
     gameOverAlert = function() {
       stopTimer();
-      game_over_sound.play();
+      $cordovaNativeAudio.play('game_over_sound');
       return $ionicPopup.alert({
         title: 'Game over',
         template: "Scores: " + (Game.scoreStr()) + ".",
@@ -137,9 +137,11 @@
     };
     $interval(timer, 100);
     $scope.displayName = false;
-    end_sound = new Audio('../sounds/182351__kesu__alarm-clock-beep.wav');
-    round_sound = new Audio('../sounds/137106__chaosportal__whistle-07-cut.wav');
-    game_over_sound = new Audio('../sounds/242855__plasterbrain__friend-request.wav');
+    $ionicPlatform.ready(function() {
+      $cordovaNativeAudio.preloadSimple('end_sound', '../sounds/182351__kesu__alarm-clock-beep.wav');
+      $cordovaNativeAudio.preloadSimple('round_sound', '../sounds/137106__chaosportal__whistle-07-cut.wav');
+      return $cordovaNativeAudio.preloadSimple('game_over_sound', '../sounds/242855__plasterbrain__friend-request.wav');
+    });
     return Game.newGame();
   });
 
