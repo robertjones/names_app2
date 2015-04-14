@@ -65,7 +65,7 @@ angular.module('starter.controllers', [])
     stopTimer()
     $ionicPopup.alert(
       title: 'Get ready'
-      template: """<p>Get your teammates to guess as many famous figures and characters as you can before the time runs out; without saying any part of the name shown or rhyming.</p>
+      template: """<p>Get your teammates to guess as many famous figures and characters as you can before the time runs out; without saying any part of the name shown, or rhyming.</p>
                    <p>Once all the names are guessed, a new round begins and you're limited to three, then one, then no words.</p>
                    <p>You get two skips per go and you'll need to split into two teams (Green and Blue).</p>
                    #{Game.currentTeam().name}'s up - it's #{Game.currentRound()}."""
