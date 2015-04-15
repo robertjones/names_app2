@@ -2,21 +2,21 @@
 (function() {
   angular.module('starter.controllers', []).controller('AppCtrl', function($scope, $ionicPopup, $location, $ionicHistory, Game, NameLists) {
     $scope.numListsSelected = function() {
-      var key, value;
+      var list;
       return ((function() {
-        var _results;
+        var _i, _len, _results;
         _results = [];
-        for (key in NameLists) {
-          value = NameLists[key];
-          if (value.selected) {
-            _results.push(key);
+        for (_i = 0, _len = NameLists.length; _i < _len; _i++) {
+          list = NameLists[_i];
+          if (list.selected) {
+            _results.push(null);
           }
         }
         return _results;
       })()).length;
     };
     return $scope.newGame = function() {
-      if ($scope.numListsSelected(NameLists) < 1) {
+      if ($scope.numListsSelected() < 1) {
         $ionicHistory.nextViewOptions({
           disableAnimate: true,
           disableBack: true

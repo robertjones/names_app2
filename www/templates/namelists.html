@@ -2,11 +2,11 @@
 
   <ion-content class="has-bottom">
     <ul class="list">
-      <li class="item item-checkbox" ng-repeat="(key, value) in namelists">
+      <li class="item item-checkbox" ng-repeat="list in namelists">
          <label class="checkbox">
-           <input type="checkbox" ng-model="value.selected">
+           <input type="checkbox" ng-model="list.selected">
          </label>
-         {{value.catName}}
+         {{list.catName}}
       </li>
     </ul>
   </ion-content>

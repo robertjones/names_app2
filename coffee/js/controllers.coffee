@@ -2,10 +2,10 @@ angular.module('starter.controllers', [])
 
 .controller('AppCtrl', ($scope, $ionicPopup, $location, $ionicHistory, Game, NameLists) ->
   $scope.numListsSelected = ->
-      (key for key, value of NameLists when value.selected).length
+      (null for list in NameLists when list.selected).length
 
   $scope.newGame = ->
-    if $scope.numListsSelected(NameLists) < 1
+    if $scope.numListsSelected() < 1
       $ionicHistory.nextViewOptions(
         disableAnimate: true
         disableBack: true

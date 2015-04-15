@@ -1,8 +1,8 @@
 angular.module('starter.services', [])
 
 .factory('NameLists', ->
-  o = {}
-  o.general =
+  o = []
+  general =
     "catName": "General"
     "selected": true
     "names": [
@@ -259,7 +259,7 @@ angular.module('starter.services', [])
       {"text":"Curt Cobain"},
       {"text":"Jimi Hendrix"}
     ]
-  o.harryPotter =
+  harryPotter =
     "catName": "Harry Potter characters"
     "selected": false
     "names": [
@@ -316,6 +316,48 @@ angular.module('starter.services', [])
       {"text":"Vernon Dursley"},
       {"text":"Xenophilius Lovegood"}
     ]
+  gameOfThrones =
+    "catName": "Game of Thrones characters"
+    "selected": false
+    "names": [
+      {"text":"Tyrion Lannister"},
+      {"text":"Cersei Lannister"},
+      {"text":"Daenerys Targaryen"},
+      {"text":"Jon Snow"},
+      {"text":"Arya Stark"},
+      {"text":"Sansa Stark"},
+      {"text":"Jorah Mormont"},
+      {"text":"Jaime Lannister"},
+      {"text":"Samwell Tarly"},
+      {"text":"Petyr Baelish"},
+      {"text":"Theon Greyjoy"},
+      {"text":"Varys"},
+      {"text":"Tywin Lannister"},
+      {"text":"Sandor Clegane (The Hound)"},
+      {"text":"Joffrey Baratheon"},
+      {"text":"Catelyn Stark"},
+      {"text":"Bran Stark"},
+      {"text":"Brienne of Tarth"},
+      {"text":"Bronn"},
+      {"text":"Robb Stark"},
+      {"text":"Shae"},
+      {"text":"Stannis Baratheon"},
+      {"text":"Margaery Tyrell"},
+      {"text":"Davos Seaworth"},
+      {"text":"Gendry"},
+      {"text":"Ygritte"},
+      {"text":"Tommen Baratheon"},
+      {"text":"Melisandre"},
+      {"text":"Gilly"},
+      {"text":"Daario Naharis"},
+      {"text":"Eddard Stark"},
+      {"text":"Khal Drogo"},
+      {"text":"Jaqen H'ghar"},
+      {"text":"Robert Baratheon"},
+      {"text":"Hodor"},
+      {"text":"Mance Rayder"}
+    ]
+  o = [general, gameOfThrones, harryPotter]
   return o
 )
 
@@ -323,7 +365,7 @@ angular.module('starter.services', [])
   o = {}
 
   selectedNames = (lists) ->
-    _.flatten(val.names for k, val of lists when val.selected)
+    _.flatten(list.names for list in lists when list.selected)
 
   # Data
   cardBank = selectedNames NameLists
@@ -404,7 +446,7 @@ angular.module('starter.services', [])
     ]
     cardBank = selectedNames NameLists
     if cardBank.length == 0
-      NameLists.general.selected = true
+      NameLists[0].selected = true
       cardBank = selectedNames NameLists
     else
       o.gameCards = _.take _.shuffle(cardBank), numCards
