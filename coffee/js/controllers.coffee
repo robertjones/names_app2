@@ -1,15 +1,22 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', ($scope, $ionicModal, $timeout, $ionicPopup, Game) ->
+.controller('AppCtrl', ($scope, $ionicPopup, $location, $ionicHistory, Game) ->
   $scope.newGame = ->
-    window.console.log('newGame clicked')
     $ionicPopup.confirm(
       title: 'End current game?',
       template: 'Are you sure you want to end the current game?'
       cancelText: 'No, play on'
       okType: 'button-assertive'
       okText: 'End game'
-    ).then((res) -> Game.newGame() if res)
+    ).then((res) ->
+      if res
+        $ionicHistory.nextViewOptions(
+          disableAnimate: true
+          disableBack: true
+        )
+        $location.path('/game')
+        Game.newGame()
+      )
 )
 
 .controller('GameCtrl', ($scope, $interval, $ionicPopup, Game) ->
@@ -99,4 +106,8 @@ angular.module('starter.controllers', [])
 
   # Init
   Game.newGame()
+)
+
+.controller('NameListsCtrl', ($scope, Game, NameLists) ->
+  $scope.namelists = NameLists
 )

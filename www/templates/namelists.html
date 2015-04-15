@@ -1,0 +1,20 @@
+<ion-view view-title="Name lists">
+
+  <ion-content class="has-bottom">
+    <ul class="list">
+      <li class="item item-checkbox" ng-repeat="(key, value) in namelists">
+         <label class="checkbox">
+           <input type="checkbox" ng-model="value.selected">
+         </label>
+         {{value.catName}}
+      </li>
+    </ul>
+  </ion-content>
+
+  <div class="row fixed-outside">
+    <div class="col">
+          <button nav-clear class="button button-block button-assertive" style="margin: 0px" ng-click="newGame()">New game with selection</button>
+        </div>
+  </div>
+
+</ion-view>

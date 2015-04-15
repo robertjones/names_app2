@@ -23,6 +23,14 @@
           controller: 'GameCtrl'
         }
       }
+    }).state('app.namelists', {
+      url: '/namelists',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/namelists.html',
+          controller: 'NameListsCtrl'
+        }
+      }
     });
     $urlRouterProvider.otherwise('/app/game');
   });
