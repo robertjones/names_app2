@@ -602,7 +602,7 @@
     };
     o.foul = cardAction(-1, o.fouledCards);
     o.skip = function() {
-      o.skippedCards.push(o.roundCards.shift());
+      cardAction(0, o.skippedCards)();
       return o.skips++;
     };
     o.got = cardAction(1, o.gotCards);

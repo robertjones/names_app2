@@ -328,7 +328,7 @@ angular.module('starter.services', [])
       o.nextRound() if o.roundCards.length == 0
   o.foul = cardAction -1, o.fouledCards
   o.skip = ->
-    o.skippedCards.push o.roundCards.shift()
+    cardAction(0, o.skippedCards)()
     o.skips++
   o.got = cardAction 1, o.gotCards
 
