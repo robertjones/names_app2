@@ -1,25 +1,41 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', ($scope, $ionicPopup, $location, $ionicHistory, Game) ->
+.controller('AppCtrl', ($scope, $ionicPopup, $location, $ionicHistory, Game, NameLists) ->
+  $scope.numListsSelected = ->
+      (key for key, value of NameLists when value.selected).length
+
   $scope.newGame = ->
-    $ionicPopup.confirm(
-      title: 'End current game?',
-      template: 'Are you sure you want to end the current game?'
-      cancelText: 'No, play on'
-      okType: 'button-assertive'
-      okText: 'End game'
-    ).then((res) ->
-      if res
-        $ionicHistory.nextViewOptions(
-          disableAnimate: true
-          disableBack: true
+    if $scope.numListsSelected(NameLists) < 1
+      $ionicHistory.nextViewOptions(
+        disableAnimate: true
+        disableBack: true
         )
-        $location.path('/game')
-        Game.newGame()
+      $location.path('/app/namelists')
+      $ionicPopup.alert(
+        title: 'Select names lists',
+        template: 'You need to select one or more name lists before you can start a new game.'
+        okType: 'button-stable'
+        okText: 'OK'
       )
+    else
+      $ionicPopup.confirm(
+        title: 'End current game?',
+        template: 'Are you sure you want to end the current game?'
+        cancelText: 'No, play on'
+        okType: 'button-assertive'
+        okText: 'End game'
+      ).then((res) ->
+        if res
+          $ionicHistory.nextViewOptions(
+            disableAnimate: true
+            disableBack: true
+          )
+          $location.path('/app/game')
+          Game.newGame()
+        )
 )
 
-.controller('GameCtrl', ($scope, $interval, $ionicPopup, Game) ->
+.controller('GameCtrl', ($scope, $interval, $ionicPopup, $location, $ionicHistory, Game) ->
   $scope.currentCard = Game.currentCard
   $scope.skip = Game.skip
   $scope.foul = Game.foul
@@ -27,6 +43,8 @@ angular.module('starter.controllers', [])
   $scope.currentTeam = Game.currentTeam
   $scope.currentRound = Game.currentRound
   maxSkips = 2
+  popupOn = false
+
   $scope.unSkippable = -> Game.skips >= maxSkips
 
   # Popups
@@ -70,6 +88,7 @@ angular.module('starter.controllers', [])
   Game.gameOverAlert = gameOverAlert
   newGameAlert = ->
     stopTimer()
+    popupOn = true
     $ionicPopup.alert(
       title: 'Get ready'
       template: """<p>Get your teammates to guess as many famous figures and characters as you can before the time runs out; without saying any part of the name shown, or rhyming.</p>
@@ -78,13 +97,17 @@ angular.module('starter.controllers', [])
                    #{Game.currentTeam().name}'s up - it's #{Game.currentRound()}."""
       okText: 'Start game'
       okType: 'button-balanced'
-    ).then(startTimer)
+    ).then(->
+      popupOn = false
+      startTimer()
+    )
   Game.newGameAlert = newGameAlert
 
   # Timer
   goLength = 60
   timeRemaining = goLength * 10
-  timerOn = true
+  timerOn = false
+
   timer = ->
     if timerOn
       timeRemaining -= 1
@@ -102,7 +125,9 @@ angular.module('starter.controllers', [])
     $scope.displayName = false
   $scope.timePercent = -> timeRemaining/goLength/10*100
   $interval(timer, 100)
-  $scope.displayName = false
+
+  $scope.$on('$ionicView.enter', -> startTimer() unless popupOn)
+  $scope.$on('$ionicView.leave', stopTimer)
 
   # Init
   Game.newGame()

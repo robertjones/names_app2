@@ -13,7 +13,7 @@
 
   <div class="row fixed-outside">
     <div class="col">
-          <button nav-clear class="button button-block button-assertive" style="margin: 0px" ng-click="newGame()">Use in new game</button>
+          <button nav-clear class="button button-block button-assertive" style="margin: 0px" ng-class="{'disabled' : numListsSelected() < 1}" ng-click="newGame()">Use in new game</button>
         </div>
   </div>
 

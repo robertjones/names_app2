@@ -319,7 +319,7 @@ angular.module('starter.services', [])
   return o
 )
 
-.factory('Game', (NameLists) ->
+.factory('Game', (NameLists, $ionicPopup) ->
   o = {}
 
   selectedNames = (lists) ->
@@ -403,14 +403,18 @@ angular.module('starter.services', [])
       "Round 4: No words"
     ]
     cardBank = selectedNames NameLists
-    o.gameCards = _.take _.shuffle(cardBank), numCards
-    o.roundCards = _.shuffle o.gameCards
-    o.scores = {Blue: 0, Green: 0}
-    o.turnPoints = 0
-    o.teams = _.shuffle(o.teams)
-    o.newGameAlert()
-    o.skips = 0
-    o.resetTimer()
+    if cardBank.length == 0
+      NameLists.general.selected = true
+      cardBank = selectedNames NameLists
+    else
+      o.gameCards = _.take _.shuffle(cardBank), numCards
+      o.roundCards = _.shuffle o.gameCards
+      o.scores = {Blue: 0, Green: 0}
+      o.turnPoints = 0
+      o.teams = _.shuffle(o.teams)
+      o.newGameAlert()
+      o.skips = 0
+      o.resetTimer()
 
   # Return object
   return o

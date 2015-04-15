@@ -626,7 +626,7 @@
       ]
     };
     return o;
-  }).factory('Game', function(NameLists) {
+  }).factory('Game', function(NameLists, $ionicPopup) {
     var cardAction, cardBank, numCards, o, selectedNames;
     o = {};
     selectedNames = function(lists) {
@@ -735,17 +735,22 @@
     o.newGame = function() {
       o.rounds = ["Round 1: No limit", "Round 2: Three words", "Round 3: One word", "Round 4: No words"];
       cardBank = selectedNames(NameLists);
-      o.gameCards = _.take(_.shuffle(cardBank), numCards);
-      o.roundCards = _.shuffle(o.gameCards);
-      o.scores = {
-        Blue: 0,
-        Green: 0
-      };
-      o.turnPoints = 0;
-      o.teams = _.shuffle(o.teams);
-      o.newGameAlert();
-      o.skips = 0;
-      return o.resetTimer();
+      if (cardBank.length === 0) {
+        NameLists.general.selected = true;
+        return cardBank = selectedNames(NameLists);
+      } else {
+        o.gameCards = _.take(_.shuffle(cardBank), numCards);
+        o.roundCards = _.shuffle(o.gameCards);
+        o.scores = {
+          Blue: 0,
+          Green: 0
+        };
+        o.turnPoints = 0;
+        o.teams = _.shuffle(o.teams);
+        o.newGameAlert();
+        o.skips = 0;
+        return o.resetTimer();
+      }
     };
     return o;
   });
