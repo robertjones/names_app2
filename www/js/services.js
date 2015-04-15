@@ -10,8 +10,6 @@
       }, {
         "text": "Tony Blair"
       }, {
-        "text": "John Major"
-      }, {
         "text": "Margaret Thatcher"
       }, {
         "text": "Barack Obama"
@@ -31,8 +29,6 @@
         "text": "Lance Armstrong"
       }, {
         "text": "Michael Jackson"
-      }, {
-        "text": "Norman Cook (Fatboy Slim)"
       }, {
         "text": "Madonna"
       }, {
@@ -123,8 +119,6 @@
         "text": "Charles Dickens"
       }, {
         "text": "Harrison Ford"
-      }, {
-        "text": "Dwight D. Eisenhower"
       }, {
         "text": "Pablo Picasso"
       }, {
@@ -222,17 +216,11 @@
       }, {
         "text": "Justin Timberlake"
       }, {
-        "text": "Colin L. Powell"
-      }, {
         "text": "Beyoncé Knowles"
-      }, {
-        "text": "Jessica Simpson"
       }, {
         "text": "Whoopi Goldberg"
       }, {
         "text": "Jane Austen"
-      }, {
-        "text": "Weird Al Yankovic"
       }, {
         "text": "Kanye West"
       }, {
@@ -286,8 +274,6 @@
       }, {
         "text": "Alexander Fleming"
       }, {
-        "text": "Samuel Johnson"
-      }, {
         "text": "Henry Ford"
       }, {
         "text": "Oscar Wilde"
@@ -334,19 +320,13 @@
       }, {
         "text": "Muhammad Ali"
       }, {
-        "text": "Charles de Gaulle"
-      }, {
         "text": "Queen Elizabeth II"
-      }, {
-        "text": "Queen Victoria"
       }, {
         "text": "John M Keynes"
       }, {
         "text": "J.K.Rowling"
       }, {
         "text": "Angelina Jolie"
-      }, {
-        "text": "Lord Baden Powell"
       }, {
         "text": "Michael Jordon"
       }, {
@@ -511,6 +491,22 @@
         "text": "Zeus"
       }, {
         "text": "The Tooth Fairy"
+      }, {
+        "text": "The Pope"
+      }, {
+        "text": "Bruce Willis"
+      }, {
+        "text": "Hugh Grant"
+      }, {
+        "text": "Serena Williams"
+      }, {
+        "text": "Bono"
+      }, {
+        "text": "Ozzy Osbourne"
+      }, {
+        "text": "Curt Cobain"
+      }, {
+        "text": "Jimi Hendrix"
       }
     ];
     return o;
