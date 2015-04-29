@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="net.rjones.names2" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="net.rjones.names" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
   <name>Names In A Hat</name>
   <description>
-        A party game.
+        A name guessing party game.
     </description>
-  <author email="robjones9109@gmail.com" href="http://www.namesinahat.org">
+  <author email="rob.jones.web@gmail.com" href="http://www.namesinahat.org">
       Rob Jones
     </author>
   <content src="index.html"/>
