@@ -5,7 +5,7 @@
         A name guessing party game.
     </description>
   <author email="rob.jones.web@gmail.com" href="http://www.namesinahat.org">
-      Rob Jones
+      Robert Jones
     </author>
   <content src="index.html"/>
   <access origin="*"/>
